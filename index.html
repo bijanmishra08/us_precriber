@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <!-- Apollo CSS -->
+      <!--   <link rel="stylesheet" href="./css/bootstrap.min.css " crossorigin="anonymous"> -->
+      <!-- <link rel="stylesheet" href="./css/apollo.css" crossorigin="anonymous"> -->
+      <link rel="stylesheet" href="https://cdn.ims.io/design/css/1.1.1/apollo.min.css" >
+	  
+	  <link rel="stylesheet" href="./jquery.tokenize.css" >
+	 
+	 
+  <link rel="stylesheet" href="css/css/libs/prism.css">
+  <link rel="stylesheet" href="css/css/libs/animate.min.css">
+
+
+  <!-- popSelect -->
+  <link rel="stylesheet" href="css/dist/jquery.popSelect.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+  
+  
+	  
+	  
+      
+      <style>
+			#div{
+				width:300px;
+				height:100px;
+				line-height:100px;
+				border:5px dashed #CCC;
+
+				font-family:Verdana;
+				text-align:center;
+			}
+
+
+			.badge-notify{
+				text-align:center;
+				padding: 5px ; 
+			    width: auto;
+				border-radius: 40px;
+				background:#297dfd;
+			    color:white;
+				left: -18px;
+				top: -14px;
+				position: relative;
+   
+			}
+
+			body{
+
+				overflow-x: hidden;
+			}
+			
+			.navbar {
+    z-index: 5;
+    background-color: #5714ff;
+}
+
+#rowToFilter{
+
+width:90px;
+}
+	
+
+.card-block{
+
+	
+	height:280px
+
+}
+
+.container {
+
+	width:100% !important;
+}
+
+.card-block, .card-header {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
+
+.popover-select-list{
+
+  overflow-y:scroll;
+  max-height:200px;
+  
+}
+.popover-select-wrapper{
+	width:400px;
+
+}
+
+ .zip {
+    fill: none;
+    stroke: black;
+    stroke-width: .2px;
+  }
+  
+  .background {
+  fill: none;
+  pointer-events: all;
+}
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: auto;					
+    height: auto;					
+    padding: 10px;				
+    font: 12px sans-serif;		
+    background: black;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;
+    color:white;	
+}
+
+.drag{
+    width:100px;
+    height:100px;
+    border:1px solid transparent;
+}
+
+.circle{
+    border:1px solid #003;
+    background-color: #37A047;
+    -moz-border-radius:100%;
+    -webkit-border-radius:100%;
+    border-radius:100%;
+    width:100%;
+    height:100%;
+    color:#FFF;
+    text-align:center;
+}
+.selectedBorder{
+    border:1px solid #000;
+   /* z-index:5 !important; */
+}
+
+.pnlin{
+	left:-300px;
+	  -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.pnlout{
+	left:0px;
+	  -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.btnin{
+	left:0px;
+	  -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.btnout{
+	left:300px;
+	  -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+ .select2-dropdown{
+ 
+	z-index:99999999999;
+ }
+ 
+ .nanRes{
+	margin:auto;
+	transform:translateY(0%);
+ }
+	
+	
+	
+	.card {
+    margin-bottom: 1.875rem;
+	border: 0px solid #44719E !important;
+    border-top: 0px solid #44719E !important;
+    background-color: #fff;
+    transition: all .25s cubic-bezier(0,0,.5,1);
+}
+
+.card {
+    margin-bottom: 1.875rem;
+    border: 1px solid #44719E;
+    background-color: #fff;
+    transition: all .25s cubic-bezier(0,0,.5,1);
+}
+
+
+
+.card-footer {
+    background-color: mediumturquoise;
+  }
+
+  
+  
+  
+  .effect1{
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+	   -moz-box-shadow: 0 10px 6px -6px #777;
+	        box-shadow: 0 10px 6px -6px #777;
+}
+
+/*==================================================
+ * Effect 2
+ * ===============================================*/
+.effect2
+{
+  position: relative;
+}
+.effect2:before, .effect2:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.effect2:after
+{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
+/*==================================================
+ * Effect 3
+ * ===============================================*/
+.effect3
+{
+  position: relative;
+}
+.effect3:before
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+/*==================================================
+ * Effect 4
+ * ===============================================*/
+.effect4
+{
+  position: relative;
+}
+.effect4:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  right: 10px;
+  left: auto;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+}
+
+/*==================================================
+ * Effect 5
+ * ===============================================*/
+.effect5
+{
+  position: relative;
+}
+.effect5:before, .effect5:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 35px 20px #777;
+  -moz-box-shadow: 0 35px 20px #777;
+  box-shadow: 0 35px 20px #777;
+  -webkit-transform: rotate(-8deg);
+  -moz-transform: rotate(-8deg);
+  -o-transform: rotate(-8deg);
+  -ms-transform: rotate(-8deg);
+  transform: rotate(-8deg);
+}
+.effect5:after
+{
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  -o-transform: rotate(8deg);
+  -ms-transform: rotate(8deg);
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
+}
+
+/*==================================================
+ * Effect 6
+ * ===============================================*/
+.effect6
+{
+  	position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.effect6:before, .effect6:after
+{
+	content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:50%;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+.effect6:after
+{
+	right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+
+/*==================================================
+ * Effect 7
+ * ===============================================*/
+.effect7
+{
+  	position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.effect7:before, .effect7:after
+{
+	content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:0;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+.effect7:after
+{
+	right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+
+/*==================================================
+ * Effect 8
+ * ===============================================*/
+.effect8
+{
+  	position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.effect8:before, .effect8:after
+{
+	content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:10px;
+    bottom:10px;
+    left:0;
+    right:0;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+.effect8:after
+{
+	right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+  
+  
+  
+      </style>
+   </head>
+   <body >
+      <nav class="navbar">
+         <div class="container" style="height:125px;">
+            <!-- Logo and/or name -->
+            <a class="navbar-brand" href="">
+            <img src="./images/logo.jpg"  style="width:566px;position: absolute;left: -1px;top:-19px" alt="">
+            </a>
+         </div>
+      </nav>
+      <div class="billboard  text-xs-center" style="background-image: linear-gradient(to right, rgba(255,255,255,.8),rgba(255,255,255,.8)), url('http://placeimg.com/1000/400/tech/grayscale'); background-size: cover;">
+         <div class="container-fluid">
+            <h1 class="billboard-title"></h1>
+            <p class="billboard-description"></p>
+            <div>
+               <a class="btn btn-secondary" href="#main-container" role="button">SEE DASHBOARD</a>
+            </div>
+         </div>
+      </div>
+      <div id="main-container">
+	  <nav class="navbar">
+  <div class="container">
+    <!-- Logo and/or name -->
+    <a class="navbar-brand" href="#0">
+      <svg class="navbar-brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 106.27"><polygon points="0 0 29.32 50.79 117.3 0 0 0" style="fill: #fff"/><polygon points="120 4.69 32.03 55.47 61.35 106.27 120 4.69" style="fill: #fff;opacity: 0.5"/></svg>
+      DASHBOARD
+    </a>
+    <!-- Links -->
+    <ul class="navbar-links">
+      <li class="navbar-item active">
+        <a href="#0">HOME</a>
+      </li>
+   
+    </ul>
+    <!-- Profile -->
+ 
+  </div>
+</nav>
+
+<!-- <div class="command-bar">
+  <div class="container" style="height:auto;">
+    <ul class="command-bar-actions text-xs-right">
+      
+     <li>
+            <fieldset class="form-group">
+  <label class="form-label" for="select-position">Marmot species</label> 
+   <div class="center-block" id="main-example-container">
+                <select name="main-example" id="main-example" class="form-control">
+                  
+                </select>
+              </div>
+</fieldset>
+      </li>
+      <li>
+        <a class="btn btn-link" href="#0" style="transform: translateY(-32px);">
+          <span class="icon icon-import"></span> Download
+        </a>
+      </li>
+     
+    </ul>
+  </div>
+</div> -->
+
+<div class="pnlin" id="filterPnl" style="border: 2px solid #73AD21;position:absolute;top:530px;width:300px;min-height:350px;background-color:white;z-index:9999999999;word-wrap: break-word;color:black;font-weight:bold;font-size:20px;padding:9px;">
+Select specilisation :
+	<select multiple id="e1" style="width:100%">
+     
+    </select>
+
+</div>
+
+<!-- <div class="btnin" id="filterbtn" style="position:absolute;top:530px;width:30px;height:auto;background-color:red;z-index:9999999999;word-wrap: break-word;color:white;font-weight:bold;font-size:20px;padding:9px;">FILTER</div>
+ -->	  
+<div class="container" id="mainCon">
+
+
+<div class="row">
+ <div class="col-xs-8 ">
+
+	<div class="card-deck-wrapper" style="padding-top:20px;">
+	<div class="card-deck">
+    <div class="card effect2">
+     <!--  <div class="card-header">
+        <h4 class="card-title">PRESCRIBER SEGMENTATION</h4>
+        <p class="card-caption"></p>
+      </div> -->
+      <div class="card-block" id="bubble1">
+       
+
+	 </div>
+      <div class="card-footer">
+        <div class="card-cta">
+          <button class="btn btn-primary btn-sm">PRESCRIBER SEGMENTATION</button>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-link btn-sm">
+            <span class="icon icon-star"></span>
+          </button>
+          <button class="btn btn-link btn-sm">
+            <span class="icon icon-campaign"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+ </div>
+ <div class="col-xs-4 ">
+
+	<div class="card-deck-wrapper" style="padding-top:20px;">
+	<div class="card-deck">
+    <div class="card effect2">
+	
+	 <!--  <div class="card-header " id="mapHead">
+        <h4 class="card-title">US MAP</h4>
+        <p class="card-caption">With Poulation Rate</p>
+      </div> -->
+      <div class="card-block" id="map" style="height:280px;">
+	  
+     
+       
+	  
+	  </div>
+      <div class="card-footer" id="mapFoot">
+        <div class="card-cta">
+          <button class="btn btn-primary btn-sm">US MAP( With Poulation Rate )</button>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-link btn-sm">
+            <span class="icon icon-star"></span>
+          </button>
+          <button class="btn btn-link btn-sm">
+            <span class="icon icon-campaign"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+ </div>
+ 
+  <div class="col-xs-6 ">
+
+	<div class="card-deck-wrapper" style="margin-top:-15px;">
+	<div class="card-deck">
+    <div class="card effect2">
+      <!-- <div class="card-header">
+        <h4 class="card-title">DRUG DESCRIPTION RATE</h4>
+         <p class="card-caption"></p> 
+      </div> -->
+	  
+	  <div class="nanRes">select a zip from map to view .</div>
+      <div class="card-block"id="line1">
+	  
+          
+	  </div>
+      <div class="card-footer">
+        <div class="card-cta">
+          <button class="btn btn-primary btn-sm">DRUG PRESCRIPTION RATE</button>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-link btn-sm">
+            <span class="icon icon-star"></span>
+          </button>
+          <button class="btn btn-link btn-sm">
+            <span class="icon icon-campaign"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+ </div>
+  <div class="col-xs-6 ">
+
+	<div class="card-deck-wrapper" style="margin-top:-15px;">
+	<div class="card-deck">
+    <div class="card effect2">
+    <!--   <div class="card-header">
+        <h4 class="card-title"> UNIQUE PRESCRIBER SPECIALISATION CLASIFICATION</h4>
+      <p class="card-caption">CLUSTERWISE</p> 
+      </div> -->
+	  <div class="nanRes">select a zip from map to view .</div>
+      <div class="card-block" id="container1">
+         
+	  </div>
+      <div class="card-footer">
+        <div class="card-cta">
+          <button class="btn btn-primary btn-sm"> UNIQUE SPECIALZATION ( PER CLUSTER )</button>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-link btn-sm">
+            <span class="icon icon-star"></span>
+          </button>
+          <button class="btn btn-link btn-sm">
+            <span class="icon icon-campaign"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+ </div>
+
+  </div>
+</div>
+
+     </div>
+	  
+      <div class="navbar navbar-default navbar-fixed-bottom" id="footer">
+         <div class="container">
+            <p class="navbar-text pull-left" id="footerText">
+            </p>
+         </div>
+      </div>
+
+<div id="mask" style="width:100%;height:100%;position:fixed;background-color:black;top:0px;left:0px;opacity:0.7;z-index:99999999;display:none;">	  
+<div class="loading-indicator loading-complex" style="margin:auto;margin-top:10%;" >
+  <svg class="spinner-inner" viewbox="0 0 64 64">
+    <circle class="spinner" r="25%" cx="50%" cy="50%"></circle>
+  </svg>
+  <svg class="spinner-outer" viewbox="0 0 64 64">
+    <circle class="spinner" r="25%" cx="50%" cy="50%"></circle>
+  </svg>
+  <span class="planet inner"></span>
+  <span class="planet middle"></span>
+  <span class="planet outer"></span>
+</div>
+</div>
+
+<div id="popupBack" style="min-width:100%;height:1200px;position:fixed;overflow:hidden;top:0px;left:0px;background:gray;z-index:18;opacity:0.5;display:none;"></div>
+<div id ="popup" style="position:fixed;margin-left:auto;margin-right:auto;top:100px;right:0px;left:0px;width:650px;height:600px;background-color:white;z-index:20;display:none;overflow-y:scroll;">
+<div class="table-responsive" id="popupTable">
+  <table class="table">
+    <thead>
+      <tr>
+		<th>Id</th>
+        <th>Specilisation</th>
+        <th>Zip</th>
+        <th>Income</th>
+        <th>Min. Income</th>
+        <th>Max Income</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr>
+        <td>USA</td>
+        <td>Washington D.C.</td>
+        <td>309 million</td>
+        <td>English</td>
+        <td>
+          <a href="#0">Action</a>
+        </td>
+      </tr> -->
+      
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+<div id ="uniqPre" style="position:fixed;margin-left:auto;margin-right:auto;top:100px;right:0px;left:0px;width:650px;height:600px;background-color:white;z-index:20;display:none;overflow-y:scroll;">
+<div class="table-responsive" id="uniqPretable">
+  <table class="table">
+    <thead>
+      <tr>
+		<th>Uniq Specilisation </th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr>
+        <td>USA</td>
+        <td>Washington D.C.</td>
+        <td>309 million</td>
+        <td>English</td>
+        <td>
+          <a href="#0">Action</a>
+        </td>
+      </tr> -->
+      
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+	  
+	   <script src="js/src/libs/jquery.js"></script>
+	  
+      <!-- jQuery first, then Apollo JS. -->
+    <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  -->
+<!-- 	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
+ <!--      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script> -->
+      <script src="./js/apollo.js" crossorigin="anonymous"></script>
+<!--       <script type="text/javascript" src="js/jquery-latest.js"></script>
+      <script type="text/javascript" src="js/jquery.tablesorter.js"></script> -->
+	  
+	  
+	  <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/maps/modules/map.js"></script>
+	 
+	 <!--  <script src="https://code.highcharts.com/maps/highmaps.js"></script> -->
+	 
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+<!-- <script src="https://code.highcharts.com/maps/modules/exporting.js"></script> -->
+<script src="https://code.highcharts.com/mapdata/countries/us/us-all-all.js"></script>
+
+<script src="./jquery.tokenize.js"></script>
+
+
+  <!-- Plugin JavaScript -->
+  <script src="js/src/libs/jquery.easing.min.js"></script>
+  <script src="js/src/libs/jquery.fittext.js"></script>
+  <script src="js/src/libs/wow.min.js"></script>
+  <script src="js/src/libs/prism.js"></script>
+
+  <!-- Custom Theme JavaScript -->
+ 
+
+  <!-- popSelect jQuery plugin -->
+  <script src="css/dist/jquery.popSelect.min.js"></script>
+
+	   <script src="http://d3js.org/d3.v3.min.js"></script> 
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+ <!--  <script src="./d3.js"></script> -->
+  
+
+<script src="http://d3js.org/queue.v1.min.js"></script> 
+  <script src="http://d3js.org/topojson.v1.min.js"></script> 
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>    
+
+
+      <script src="js/data.js"></script>
+      <script src="js/english.js"></script>
+      <script src="js/app.js"></script>
+      
+      <script src="js/onload.js"></script>
+   </body>
+</html>
